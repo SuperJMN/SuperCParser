@@ -9,6 +9,7 @@
         Number,
         Semicolon,
         LBrace,
-        RBrace
+        RBrace,
+        Else
     }
 }

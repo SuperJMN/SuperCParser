@@ -11,6 +11,7 @@ namespace SuppaParser
             return new TokenizerBuilder<CToken>()
                 .Ignore(Span.WhiteSpace)
                 .Match(Span.EqualTo("if"), CToken.If, true)
+                .Match(Span.EqualTo("else"), CToken.Else, true)
                 .Match(Character.EqualTo('('), CToken.LParen)
                 .Match(Character.EqualTo(')'), CToken.RParen)
                 .Match(Character.EqualTo(';'), CToken.Semicolon)
