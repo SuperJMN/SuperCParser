@@ -8,5 +8,10 @@
         {
             Identifier = identifier;
         }
+
+        public override string ToString()
+        {
+            return $"{Identifier}";
+        }
     }
 }

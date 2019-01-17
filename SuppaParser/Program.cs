@@ -1,17 +1,19 @@
-﻿namespace SuppaParser
+﻿using System.Collections.Generic;
+
+namespace SuppaParser
 {
     public class Program : CSyntax
     {
-        public Statement Statement { get; }
+        public IEnumerable<Function> Functions { get; }
 
-        public Program(Statement statement)
+        public Program(IEnumerable<Function> functions)
         {
-            Statement = statement;
+            Functions = functions;
         }
 
         public override string ToString()
         {
-            return Statement.ToString();
+            return string.Concat(Functions);
         }
     }
 }
