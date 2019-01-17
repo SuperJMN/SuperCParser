@@ -11,6 +11,11 @@
         LBrace,
         RBrace,
         Else,
-        Comma
+        Comma,
+        Double,
+        Float,
+        Char,
+        Int,
+        Void
     }
 }

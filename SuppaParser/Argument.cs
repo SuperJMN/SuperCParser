@@ -2,16 +2,18 @@
 {
     public class Argument
     {
+        public PrimitiveType PrimitiveType { get; }
         public string Name { get; }
 
-        public Argument(string name)
+        public Argument(PrimitiveType primitiveType, string name)
         {
+            PrimitiveType = primitiveType;
             Name = name;
         }
 
         public override string ToString()
         {
-            return $"{Name}";
+            return $"{PrimitiveType} {Name}";
         }
     }
 }

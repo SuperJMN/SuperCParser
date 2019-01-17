@@ -25,10 +25,10 @@ namespace SuppaParser.Tests
         }
 
         [Theory]
-        [InlineData("main(a, b) {}", "main(a, b) {}")]
-        [InlineData("main() {}", "main() {}")]
-        [InlineData("main() { a; }", "main() {a;}")]
-        [InlineData("main() { if (a) b; }", "main() {if (a) b;}")]
+        [InlineData("void main(int a, int b) {}", "void main(int a, int b) {}")]
+        [InlineData("void main() {}", "void main() {}")]
+        [InlineData("void main() { a; }", "void main() {a;}")]
+        [InlineData("void main() { if (a) b; }", "void main() {if (a) b;}")]
         public void Function(string input, string expected)
         {
             AssertParse(input, expected, ParserCombinators.Function);

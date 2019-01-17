@@ -5,33 +5,19 @@ namespace SuppaParser.Tests
 {
     public class CParserSpecs
     {
-        [Fact]
-        public void If()
+        [Theory]
+        [InlineData("", "")]
+        [InlineData("if (a) b;", "if (a) b;")]
+        [InlineData("if (a) b; else c;", "if (a) b; else c;")]
+        [InlineData("if (a) {b; c; d; }", "if (a) {b;c;d;}")]
+        public void If(string input, string expected)
         {
-            AssertParse("if (a) b;", "if (a) b;");
-        }
-
-        [Fact]
-        public void Empty()
-        {
-            AssertParse("", "");
+            AssertParse(input, expected);
         }
 
         private static string Wrap(string body)
         {
-            return $"main() {{{body}}}";
-        }
-
-        [Fact]
-        public void IfElse()
-        {
-            AssertParse("if (a) b; else c;", "if (a) b; else c;");
-        }
-
-        [Fact]
-        public void IfBlock()
-        {
-            AssertParse("if (a) {b; c; d; }", "if (a) {b;c;d;}");
+            return $"int main() {{{body}}}";
         }
 
         private void AssertParse(string input, string expected)

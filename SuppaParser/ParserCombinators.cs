@@ -1,5 +1,4 @@
-﻿using System;
-using Superpower;
+﻿using Superpower;
 using Superpower.Parsers;
 using static Superpower.Parse;
 
@@ -40,15 +39,24 @@ namespace SuppaParser
             from elseExpr in Else.OptionalOrDefault()
             select (Statement)new IfStatement(condition, trueStmt, elseExpr);
 
+        private static readonly TokenListParser<CToken, PrimitiveType> PrimitiveType =
+            Token.EqualTo(CToken.Int).Value(SuppaParser.PrimitiveType.Int)
+                .Or(Token.EqualTo(CToken.Double).Value(SuppaParser.PrimitiveType.Double))
+                .Or(Token.EqualTo(CToken.Float).Value(SuppaParser.PrimitiveType.Float))
+                .Or(Token.EqualTo(CToken.Void).Value(SuppaParser.PrimitiveType.Void))
+                .Or(Token.EqualTo(CToken.Char).Value(SuppaParser.PrimitiveType.Char));
+        
         private static readonly TokenListParser<CToken, Argument> Argument =
+            from t in PrimitiveType
             from i in Identifier
-            select new Argument(i);
+            select new Argument(t, i);
 
         public static readonly TokenListParser<CToken, Function> Function =
+            from returnType in PrimitiveType
             from name in Identifier
             from arguments in Argument.CommaSeparated().BetweenParenthesis()
             from block in Block
-            select new Function(name, arguments, (Block)block);
+            select new Function(returnType, name, arguments, (Block)block);
 
         public static readonly TokenListParser<CToken, Program> Program = 
             from fs in Function.Many()
