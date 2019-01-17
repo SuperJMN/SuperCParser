@@ -40,11 +40,15 @@ namespace SuppaParser
             from elseExpr in Else.OptionalOrDefault()
             select (Statement)new IfStatement(condition, trueStmt, elseExpr);
 
+        private static readonly TokenListParser<CToken, Argument> Argument =
+            from i in Identifier
+            select new Argument(i);
+
         public static readonly TokenListParser<CToken, Function> Function =
             from name in Identifier
-            from parens in Token.EqualTo(CToken.LParen).IgnoreThen(Token.EqualTo(CToken.RParen))
+            from arguments in Argument.CommaSeparated().BetweenParenthesis()
             from block in Block
-            select new Function(name, (Block)block);
+            select new Function(name, arguments, (Block)block);
 
         public static readonly TokenListParser<CToken, Program> Program = 
             from fs in Function.Many()

@@ -14,5 +14,10 @@ namespace SuppaParser
         {
             return self.Between(Token.EqualTo(CToken.LBrace), Token.EqualTo(CToken.RBrace));
         }
+
+        public static TokenListParser<CToken, T[]> CommaSeparated<T>(this TokenListParser<CToken, T> self)
+        {
+            return self.ManyDelimitedBy(Token.EqualTo(CToken.Comma));
+        }
     }
 }

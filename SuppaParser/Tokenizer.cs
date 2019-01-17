@@ -17,6 +17,7 @@ namespace SuppaParser
                 .Match(Character.EqualTo(';'), CToken.Semicolon)
                 .Match(Character.EqualTo('{'), CToken.LBrace)
                 .Match(Character.EqualTo('}'), CToken.RBrace)
+                .Match(Character.EqualTo(','), CToken.Comma)
                 .Match(Numerics.Integer, CToken.Number)
                 .Match(Span.Regex(@"\w[\w\d]*"), CToken.Identifier, true)     
                 .Build();

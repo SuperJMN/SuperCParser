@@ -10,6 +10,7 @@
         Semicolon,
         LBrace,
         RBrace,
-        Else
+        Else,
+        Comma
     }
 }

@@ -25,6 +25,7 @@ namespace SuppaParser.Tests
         }
 
         [Theory]
+        [InlineData("main(a, b) {}", "main(a, b) {}")]
         [InlineData("main() {}", "main() {}")]
         [InlineData("main() { a; }", "main() {a;}")]
         [InlineData("main() { if (a) b; }", "main() {if (a) b;}")]
